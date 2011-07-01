@@ -2,6 +2,10 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation
   attr_accessor   :password
   
+  #will paginate variables
+  cattr_reader :per_page
+  @@per_page = 10
+  
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   
   validates :name, :presence => true,
