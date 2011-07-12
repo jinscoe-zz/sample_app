@@ -187,8 +187,15 @@ describe User do
       end
       
       it "should include users microposts" do
-        @user.feed.include?(@mp1).should be_true
+        @user.feed.include?(@mp1)
+        @user.feed.include?(@mp2)
       end
+      
+      it "should not include a different users micro posts" do
+        mp3 = Factory(:micropost, :user => Factory(:user, :email  => Factory.next(:email)))
+        @user.feed.should_not include(mp3)
+      end
+      
     end
     
     it "should have a microposts attribute" do
