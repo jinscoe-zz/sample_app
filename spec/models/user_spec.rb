@@ -181,6 +181,16 @@ describe User do
       @mp2 = Factory(:micropost, :user  => @user, :created_at => 1.hour.ago )
     end
     
+    describe "status feed" do
+      it "should have a feed" do
+        @user.should respond_to(:feed)
+      end
+      
+      it "should include users microposts" do
+        @user.feed.include?(@mp1).should be_true
+      end
+    end
+    
     it "should have a microposts attribute" do
       @user.should respond_to(:microposts)
     end
